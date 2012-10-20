@@ -22,20 +22,21 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 public class WarTurtles {
 
         // The instance of your mod that Forge uses.
-	@Instance("WarTurtles")
+    @Instance("WarTurtles")
 	public static WarTurtles instance;
 	
 	// Says where the client and server 'proxy' code is loaded.
 	@SidedProxy(clientSide="leoverto.warturtles.ClientProxy", serverSide="leoverto.warturtles.CommonProxy")
 	public static CommonProxy proxy;
+
+	public static int remoteControllerID;
 	
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event) {
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 		config.load();
-        int remoteControllerID = config.getOrCreateBlockIdProperty("Remote Controller", 6250).getInt();
+        remoteControllerID = config.getOrCreateIntProperty("RemoteControllerID", Configuration.CATEGORY_ITEM, 6250).getInt(6250);
 		config.save();
-	
 	}
 	
 	private final static Item remoteController = new RemoteController(remoteControllerID);
@@ -50,7 +51,7 @@ public class WarTurtles {
 		ItemStack redstoneStack = new ItemStack(Item.redstone);
 		ItemStack diamondStack = new ItemStack(Item.diamond);
 
-		GameRegistry.addRecipe(new ItemStack(Item.remoteController), "x x", "yzy", "xyx",
+		GameRegistry.addRecipe(new ItemStack(remoteController), "x x", "yzy", "xyx",
 		        'x', stoneStack, 'y', redstoneStack, 'z', diamondStack);
 	}
 	
