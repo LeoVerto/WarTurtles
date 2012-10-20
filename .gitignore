@@ -4,3 +4,27 @@
 *.jar
 *.war
 *.ear
+
+# Forge and vanilla #
+/bin/*
+/conf/*
+/docs/*
+/eclipse/*
+/forge/*
+/jars/*
+/lib/*
+/logs/*
+/modsrc/*
+/reobf/*
+/runtime/*
+/temp/*
+
+/src/minecraft/*
+/src/minecraft_server/*
+/src/common/*
+!/src/common/leoverto/
+!/src/common/mcmod.info
+!/src/common/SP.png
+
+*.bat
+*.sh
