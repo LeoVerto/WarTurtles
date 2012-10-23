@@ -23,7 +23,6 @@
 /src/minecraft_server/*
 /src/common/*
 !/src/common/leoverto/
-!/src/common/sjele
 !/src/common/mcmod.info
 !/src/common/SP.png
 
