@@ -6,21 +6,21 @@
 *.ear
 
 # Forge and vanilla #
-/bin/*
-/conf/*
-/docs/*
-/eclipse/*
-/forge/*
-/jars/*
-/lib/*
-/logs/*
-/modsrc/*
-/reobf/*
-/runtime/*
-/temp/*
+/MCP/bin/*
+/MCP/conf/*
+/MCP/docs/*
+/MCP/eclipse/*
+/MCP/forge/*
+/MCP/jars/*
+/MCP/lib/*
+/MCP/logs/*
+/MCP/modsrc/*
+/MCP/reobf/*
+/MCP/runtime/*
+/MCP/temp/*
 
-/src/minecraft/*
-/src/minecraft_server/*
+/MCP/src/minecraft/*
+/MCP/src/minecraft_server/*
 /src/common/*
 !/src/common/leoverto/
 !/src/common/mcmod.info

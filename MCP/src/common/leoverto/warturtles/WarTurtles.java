@@ -1,5 +1,6 @@
 package leoverto.warturtles;
 
+import cloudtest.TurtleTestPeripheral;
 import net.minecraft.src.Block;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
@@ -16,6 +17,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import dan200.turtle.api.TurtleAPI;
 
 @Mod(modid="WarTurtles", name="WarTurtles", version="0.0.1")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
@@ -35,8 +37,8 @@ public class WarTurtles {
 	public void preInit(FMLPreInitializationEvent event) {
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 		config.load();
-        turtleControllerID = config.getOrCreateIntProperty("TurtleControllerID", Configuration.CATEGORY_BLOCK, 2750).getInt(2750);
-		remoteControllerID = config.getOrCreateIntProperty("RemoteControllerID", Configuration.CATEGORY_ITEM, 6750).getInt(6750);
+        turtleControllerID = config.getItem(Configuration.CATEGORY_BLOCK, "TurtleControllerID", 2750).getInt(2750);
+		remoteControllerID = config.getItem(Configuration.CATEGORY_ITEM, "RemoteControllerID", 6750).getInt(6750);
 		config.save();
 	}
 	
@@ -49,6 +51,7 @@ public class WarTurtles {
 		
 		GameRegistry.registerBlock(turtleController);
 		GameRegistry.registerTileEntity(TileEntityTurtleController.class, "turleController");
+		TurtleAPI.registerUpgrade(new TurtleArcher());
 		
 		LanguageRegistry.addName(turtleController, "Turtle Controller");
 		LanguageRegistry.addName(remoteController, "Remote Controller");
