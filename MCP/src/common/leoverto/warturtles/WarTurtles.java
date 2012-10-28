@@ -21,7 +21,6 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class WarTurtles {
 
-        // The instance of your mod that Forge uses.
     @Instance("WarTurtles")
 	public static WarTurtles instance;
 	
@@ -29,31 +28,41 @@ public class WarTurtles {
 	@SidedProxy(clientSide="leoverto.warturtles.ClientProxy", serverSide="leoverto.warturtles.CommonProxy")
 	public static CommonProxy proxy;
 
+	public static int turtleControllerID;
 	public static int remoteControllerID;
 	
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event) {
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 		config.load();
-        remoteControllerID = config.getOrCreateIntProperty("RemoteControllerID", Configuration.CATEGORY_ITEM, 6250).getInt(6250);
+        turtleControllerID = config.getOrCreateIntProperty("TurtleControllerID", Configuration.CATEGORY_BLOCK, 2750).getInt(2750);
+		remoteControllerID = config.getOrCreateIntProperty("RemoteControllerID", Configuration.CATEGORY_ITEM, 6750).getInt(6750);
 		config.save();
 	}
 	
+	private final static Block turtleController = new BlockTurtleController(turtleControllerID);
 	private final static Item remoteController = new RemoteController(remoteControllerID);
 	
 	@Init
 	public void load(FMLInitializationEvent event) {
 		proxy.registerRenderers();
 		
+		GameRegistry.registerBlock(turtleController);
+		GameRegistry.registerTileEntity(TileEntityTurtleController.class, "turleController");
+		
+		LanguageRegistry.addName(turtleController, "Turtle Controller");
 		LanguageRegistry.addName(remoteController, "Remote Controller");
 		
 		ItemStack stoneStack = new ItemStack(Block.stone);
 		ItemStack redstoneStack = new ItemStack(Item.redstone);
 		ItemStack diamondStack = new ItemStack(Item.diamond);
+		ItemStack remoteControllerStack = new ItemStack(remoteController);
 
-		GameRegistry.addRecipe(new ItemStack(remoteController), "x x", "yzy", "xyx",
-		        'x', stoneStack, 'y', redstoneStack, 'z', diamondStack);
-	}
+		GameRegistry.addRecipe(new ItemStack(remoteController), "s s", "rdr", "srs",
+		        's', stoneStack, 'r', redstoneStack, 'd', diamondStack);}
+	
+		//GameRegistry.addRecipe(new ItemStack(turtleController), "srs", "rcr", "srs",
+	    //    's', stoneStack, 'r', redstoneStack, 'c', remoteControllerStack);
 	
 	@PostInit
 	public void postInit(FMLPostInitializationEvent event) {
